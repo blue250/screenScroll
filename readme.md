@@ -45,7 +45,7 @@ createApp(App).use(screenScroll).mount('#app')
 ```
 ```shell
     #使用
-    <screenScroll :ScrollOption=ScrollOption @beforeChange=func1 @agterChange=func2>
+    <screenScroll :ScrollOption=ScrollOption @beforeChange=func1 @afterChange=func2>
       <div>doc1</div>
       <div>doc2</div>
     </screenScroll>
