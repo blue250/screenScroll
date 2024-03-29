@@ -27,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { VNodeRef, onMounted, ref, defineComponent, reactive, h } from "vue";
-import PageScollClass from "./index";
+import { onMounted, ref, defineComponent, reactive, h } from "vue";
+import PageScollClass from "./main/index";
 // interface ScrollOption{
 //   Index:number
 // }
@@ -71,7 +71,7 @@ export default defineComponent({
   //     }, this.$slots.default!())
   //   ]);
   // },
-  setup(props,{emit}) {
+  setup(props,{emit}:any) {
     let defprop=reactive({
         Id:'',
 

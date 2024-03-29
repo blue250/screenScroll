@@ -91,7 +91,7 @@ export default class PageScollClass {
       if (option.Height == 'auto') {
 
       } else {
-        for (const i of children) {
+        for (const i of Array.from(children)) {
 
           // 子节点也设置为传入高度
           i.style.height || (i.style.height = option.Height);
