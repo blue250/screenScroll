@@ -8,7 +8,7 @@ npm i screen-scroll
 
 ## 注册
 ```shell
-import {screenScroll} from 'screen-scroll'
+import screenScroll from 'screen-scroll'
 
 createApp(App).use(screenScroll).mount('#app')
 ```
