@@ -165,7 +165,7 @@ export default class PageScollClass {
       const children = this.pagescrollnode!.children as HTMLCollectionOf<HTMLElement>;
       this.ReloadNode(children)
       // this.Height = this.pagescrollnode!.clientHeight
-      this.ResizePageTo()
+      this.ResizePageTo(this.ActiveNumber)
     },100))
 
     let startY: number | null = null;
@@ -274,9 +274,9 @@ export default class PageScollClass {
   }
 
   // resize时重新改变高度
-  ResizePageTo(){
+  ResizePageTo(Number:number){
     this.ChangeTime(0)
-    this.MarginTop=(this.NodeHeightList[this.ActiveNumber])||0
+    this.MarginTop=(this.NodeHeightList[Number])||0
     this.pagescrollstylefun(this.MarginTop);
   }
 
