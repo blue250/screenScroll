@@ -20,7 +20,6 @@ export function getnode(key: string): Promise<any> {
 export function setnode(key: string, value: any): void {  
     // 检查是否有等待这个key的resolver函数  
     if (resolvers[key]) {  
-        console.log(resolvers[key],resolvers[key](value),'resolvers[key]');
         
         // 如果有，调用它并传入值来resolve对应的Promise  
         resolvers[key](value);  

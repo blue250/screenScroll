@@ -17,7 +17,8 @@ const throttleScroll = function (callback: (...args: any[]) => void, time: numbe
 const debounce = function (callback: (...args: any[]) => void, time: number = 100) {
   let timer: number | undefined;
   return function (this: Window, ...args: any[]) {
-    this.clearTimeout(timer)
+    window.clearTimeout(timer)
+    
     timer = window.setTimeout(() => {
       callback.apply(this, args)
     }, time);
@@ -100,7 +101,7 @@ export default class PageScollClass {
       this.ReloadNode(children)
       this.PageLoad('On')
     }else{
-      console.log('未获取到节点');
+
       
     }
 
@@ -110,7 +111,7 @@ export default class PageScollClass {
   ReloadNode(children:HTMLCollectionOf<HTMLElement>) {
     this.Height = this.pagescrollnode!.clientHeight
     for (let i=0;i<children.length;i++) {
-      console.log(children[i].offsetTop,'children[i]');
+
       
       // 子节点设置高度
       this.NodeTimeList[i]=parseInt(children[i].getAttribute('time')||this.Time.toString())
@@ -120,7 +121,7 @@ export default class PageScollClass {
   }
   // 改变时间
   ChangeTime(time:number=0){
-    console.log(time,'ttttt');
+
     
     this.Time=time
     this.pagescrollstyle.transition= `transform ${this.Time}ms ease 0s`
@@ -159,14 +160,22 @@ export default class PageScollClass {
     }
     );
 
+
+
     // 监听页面尺寸变化 重新赋值高度
-    this.pagescrollnode!.addEventListener('resize', debounce((e) => {
-      // console.log(this.pagescrollnode!.clientHeight,'this.pagescrollnode!.clientHeight');
+    let resizeObserver:ResizeObserver|null=null;
+    let resizeFun=debounce((e) => {
       const children = this.pagescrollnode!.children as HTMLCollectionOf<HTMLElement>;
       this.ReloadNode(children)
-      // this.Height = this.pagescrollnode!.clientHeight
       this.ResizePageTo(this.ActiveNumber)
-    },100))
+    },100)
+    if(resizeObserver!==null){
+      (resizeObserver as ResizeObserver).unobserve(this.pagescrollnode as Element)
+    }
+    resizeObserver = new ResizeObserver(resizeFun);
+    resizeObserver.observe(this.pagescrollnode as Element);
+
+
 
     let startY: number | null = null;
 
@@ -215,7 +224,7 @@ export default class PageScollClass {
     n += Number;
     if (n > this.PageMax) {
       // debugger
-      console.log(this.Loop);
+
       
       if(this.Loop){
         n=0
@@ -247,14 +256,14 @@ export default class PageScollClass {
 
   // 页面跳转到number
   PageTo(Number: number) {
-    console.log('in');
+
     
     if(this.ActiveNumber==Number){
 
     }else{
       // 如果没冻结 可以动
       if(!this.Freeze){
-        console.log(this.emit,'dddddd');
+
         
       // 改变之前事件
       this.emit('beforeChange',{from:this.ActiveNumber,to:Number})
@@ -278,12 +287,14 @@ export default class PageScollClass {
     this.ChangeTime(0)
     this.MarginTop=(this.NodeHeightList[Number])||0
     this.pagescrollstylefun(this.MarginTop);
+    // 重置时间
+    this.ChangeTime(this.NodeTimeList[this.ActiveNumber])
   }
 
   // 父节点style函数
   pagescrollstylefun(height:number) {
     this.pagescrollstyle.transform = `translate(0,-${height}px)`;
-    console.log(this.pagescrollstyle,'this.pagescrollstyle');
+
     
   }
 
