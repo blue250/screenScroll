@@ -1,7 +1,7 @@
 <!-- @format -->
 
 <template>
-  <div style="position: relative; overflow: hidden">
+  <div style="position: relative; overflow: hidden;height:100%">
     <slot name="tabbar"></slot>
     <div
       class="pagescrollnode"
