@@ -1,4 +1,6 @@
 
+此处为插件源码
+
 screen-scroll是一个基于 vue3 实现的全屏或区域滚动组件
 Vue 3 component for full-page or section scrolling
 ##  安装
