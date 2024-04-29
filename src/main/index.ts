@@ -67,7 +67,7 @@ export default class PageScollClass {
   // 页面样式
   pagescrollstyle = {
     transform: "",
-    transition: `transform 700ms ease 0s`,
+    transition: `transform 0ms ease 0s`,
   };
 
   // 最大页数
@@ -123,6 +123,7 @@ export default class PageScollClass {
   ChangeTime(time:number=0){ 
     this.Time=time
     this.pagescrollstyle.transition= `transform ${this.Time}ms ease 0s`
+    
     // this.PageLoad('On')
     
   }
@@ -164,6 +165,7 @@ export default class PageScollClass {
     // 监听页面尺寸变化 重新赋值高度
     let resizeObserver:ResizeObserver|null=null;
     let resizeFun=debounce((e) => {
+      
       const children = this.pagescrollnode!.children as HTMLCollectionOf<HTMLElement>;
       this.ReloadNode(children)
       
@@ -291,15 +293,13 @@ export default class PageScollClass {
     this.MarginTop=(this.NodeHeightList[this.ActiveNumber])||0
     this.pagescrollstylefun(this.MarginTop);
     // 重置时间
-    this.ChangeTime(this.NodeTimeList[this.ActiveNumber])
+    // this.ChangeTime(this.NodeTimeList[this.ActiveNumber])
   }
 
   // 父节点style函数
   pagescrollstylefun(height:number) {
     
     this.pagescrollstyle.transform = `translate(0,-${height}px)`;
-
-    
   }
 
 }
