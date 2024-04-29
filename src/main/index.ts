@@ -77,10 +77,6 @@ export default class PageScollClass {
     this.ActiveNumber = index;
     this.Height = height;
     this.emit=emit
-    this.pagescrollstyle = {
-      transform: "",
-      transition: `transform ${this.Time}ms ease 0s`,
-    };
   }
 
   // 挂载后 有节点后
@@ -170,6 +166,7 @@ export default class PageScollClass {
     let resizeFun=debounce((e) => {
       const children = this.pagescrollnode!.children as HTMLCollectionOf<HTMLElement>;
       this.ReloadNode(children)
+      
       this.ResizePageTo(this.ActiveNumber)
     },100)
     if(resizeObserver!==null){
@@ -288,8 +285,10 @@ export default class PageScollClass {
 
   // resize时重新改变高度
   ResizePageTo(Number:number){
+    this.ActiveNumber=Number
+    // debugger
     this.ChangeTime(0)
-    this.MarginTop=(this.NodeHeightList[Number])||0
+    this.MarginTop=(this.NodeHeightList[this.ActiveNumber])||0
     this.pagescrollstylefun(this.MarginTop);
     // 重置时间
     this.ChangeTime(this.NodeTimeList[this.ActiveNumber])
@@ -297,6 +296,7 @@ export default class PageScollClass {
 
   // 父节点style函数
   pagescrollstylefun(height:number) {
+    
     this.pagescrollstyle.transform = `translate(0,-${height}px)`;
 
     
