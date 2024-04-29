@@ -54,16 +54,6 @@ createApp(App).use(screenScroll).mount('#app')
       <div>doc2</div>
     </screenScroll>
 ```
-## 内置方法
-```
-import { setnode,getnode } from 'screen-scroll'
-
-#相当于一个存放节点的地方 用于将节点或其他数据存起来 用于在其他组件或页面获取
-function setnode(key: string, value: any): void;
-
-#用于获取存放的节点 会返回一个Promise 即使先调用getnode再setnode 后续再使用getnode时也会取到相应的节点
-function getnode(key: string): Promise<any>;
-```
 
 ## 组件类
 ```

@@ -1,5 +1,4 @@
-export declare function getnode(key: string): Promise<any>;
-export declare function setnode(key: string, value: any): void;
+
 declare function install(Vue: any): void;
 export declare class PageScollClass {
   pagescroll:{
