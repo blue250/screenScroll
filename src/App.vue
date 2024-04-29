@@ -28,6 +28,7 @@
 
 <script lang="ts">
 import { onMounted, ref, defineComponent, reactive, h } from "vue";
+import PageScroll from "./main";
 import PageScollClass from "./main/index";
 // interface ScrollOption{
 //   Index:number
@@ -97,7 +98,12 @@ export default defineComponent({
 
       
     let pagescroll = reactive(new PageScollClass(p.Index, 0,emit));
-
+    // let ChangeTime=pagescroll.ChangeTime
+    // let PageNext=pagescroll.PageNext
+    // let PageUp=pagescroll.PageUp
+    // let PageTo=pagescroll.PageTo
+    // let ResizePageTo=pagescroll.ResizePageTo
+    let {ChangeTime,PageNext,PageUp,PageTo,ResizePageTo} = pagescroll
     onMounted(() => {
 
       
@@ -106,7 +112,7 @@ export default defineComponent({
       // // 设置页面监听
       // pagescroll.PageOnload();
     });
-    return { pagescroll,defprop };
+    return { pagescroll,ChangeTime,PageNext,PageUp,PageTo,ResizePageTo,defprop };
   },
 });
 </script>
