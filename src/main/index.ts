@@ -77,7 +77,10 @@ export default class PageScollClass {
     this.ActiveNumber = index;
     this.Height = height;
     this.emit=emit
-    this.pagescrollstyle.transition = `transform ${this.Time}ms ease 0s`;
+    this.pagescrollstyle = {
+      transform: "",
+      transition: `transform ${this.Time}ms ease 0s`,
+    };
   }
 
   // 挂载后 有节点后
@@ -121,7 +124,7 @@ export default class PageScollClass {
     }
   }
   // 改变时间
-  ChangeTime=(time:number=0)=>{ 
+  ChangeTime(time:number=0){ 
     this.Time=time
     this.pagescrollstyle.transition= `transform ${this.Time}ms ease 0s`
     // this.PageLoad('On')
@@ -151,6 +154,7 @@ export default class PageScollClass {
       e=>{
         e.stopPropagation()
       if (e.deltaY > 0) {
+        
         this.PageChange(1);
       }
       if (e.deltaY < 0) {
@@ -218,7 +222,8 @@ export default class PageScollClass {
   }
 
   // 页面切到下number屏
-  PageNext=(Number: number)=>{
+  PageNext(Number: number){
+    
     let n = this.ActiveNumber;
     n += Number;
     if (n > this.PageMax) {
@@ -238,7 +243,7 @@ export default class PageScollClass {
   }
 
   // 页面切到上number屏
-  PageUp=(Number: number)=>{
+  PageUp(Number: number){
     let n = this.ActiveNumber;
     n -= Number;
     if (n < 0) {
@@ -254,7 +259,7 @@ export default class PageScollClass {
   }
 
   // 页面跳转到number
-  PageTo=(Number: number)=>{
+  PageTo(Number: number){
 
     
     if(this.ActiveNumber==Number){
@@ -282,7 +287,7 @@ export default class PageScollClass {
   }
 
   // resize时重新改变高度
-  ResizePageTo=(Number:number)=>{
+  ResizePageTo(Number:number){
     this.ChangeTime(0)
     this.MarginTop=(this.NodeHeightList[Number])||0
     this.pagescrollstylefun(this.MarginTop);

@@ -98,12 +98,6 @@ export default defineComponent({
 
       
     let pagescroll = reactive(new PageScollClass(p.Index, 0,emit));
-    // let ChangeTime=pagescroll.ChangeTime
-    // let PageNext=pagescroll.PageNext
-    // let PageUp=pagescroll.PageUp
-    // let PageTo=pagescroll.PageTo
-    // let ResizePageTo=pagescroll.ResizePageTo
-    let {ChangeTime,PageNext,PageUp,PageTo,ResizePageTo} = pagescroll
     onMounted(() => {
 
       
@@ -112,7 +106,7 @@ export default defineComponent({
       // // 设置页面监听
       // pagescroll.PageOnload();
     });
-    return { pagescroll,ChangeTime,PageNext,PageUp,PageTo,ResizePageTo,defprop };
+    return { pagescroll,defprop };
   },
 });
 </script>
