@@ -83,6 +83,6 @@ class PageScollClass {
     let pagescrollref=ref<PageScollClass | null>(null)
     
     #调用 获取到节点后
-    pagescrollref.value.xx
+    pagescrollref.value.pagescroll.xx
     </script>
 ```
