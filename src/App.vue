@@ -39,26 +39,6 @@ export default defineComponent({
     ScrollOption: {
       type: Object,
       default: {
-        // 多个组件时 必填
-        Id:'',
-
-        // 起始页下班 从0开始
-        Index: 0,
-
-        // 页面直接的间隔
-        Time: 700,
-
-        // 是否循环
-        Loop: false,
-
-        // 父元素高度
-        PageHeight: "100vh",
-
-        // 子元素高度 auto可选
-        Height: "100vh",
-
-        // 是否有侧边导航
-        Nav:false
       },
     },
   },
