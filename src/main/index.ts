@@ -289,7 +289,7 @@ export default class PageScollClass {
   ResizePageTo(Number:number){
     this.ActiveNumber=Number
     // debugger
-    this.ChangeTime(0)
+    this.pagescrollstyle.transition= `transform 0ms ease 0s`
     this.MarginTop=(this.NodeHeightList[this.ActiveNumber])||0
     this.pagescrollstylefun(this.MarginTop);
     // 重置时间
