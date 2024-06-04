@@ -75,12 +75,13 @@ export default defineComponent({
         Nav:false
       })
 
+      Object.assign(defprop,props.ScrollOption)
       
-    let pagescroll = ref(new PageScollClass(defprop.Index, 0,emit));
+    let pagescroll = reactive(new PageScollClass(defprop.Index, 0,emit));
     onMounted(() => {
       watch(props.ScrollOption,(n)=>{
         Object.assign(defprop,n)
-        pagescroll.value.Mounted(defprop);    
+        pagescroll.Mounted(defprop);    
       },{immediate:true})
       
       // pagescroll.ReloadHeight()
