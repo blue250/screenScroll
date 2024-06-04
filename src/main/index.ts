@@ -85,7 +85,7 @@ export default class PageScollClass {
     this.Loop=option.Loop
     this.pagescrollnode = document.getElementById("pagescrollnode"+option.Id);
     // const mtype=showtype(option.Height)
-    if (this.pagescrollnode) {
+    if (this.pagescrollnode) {    
       this.PageMax = this.pagescrollnode.children.length - 1;
       const children = this.pagescrollnode.children as HTMLCollectionOf<HTMLElement>;
       this.pagescrollnode.style.height = option.PageHeight
@@ -95,7 +95,7 @@ export default class PageScollClass {
         for (const i of Array.from(children)) {
 
           // 子节点也设置为传入高度
-          i.style.height || (i.style.height = option.Height);
+          i.style.height = option.Height
         }
       }
       this.ReloadNode(children)

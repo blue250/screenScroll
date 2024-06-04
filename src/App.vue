@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref, defineComponent, reactive, h } from "vue";
+import { onMounted, ref, defineComponent, reactive, watch } from "vue";
 import PageScroll from "./main";
 import PageScollClass from "./main/index";
 // interface ScrollOption{
@@ -74,14 +74,15 @@ export default defineComponent({
         // 是否有侧边导航
         Nav:false
       })
-    let p=Object.assign(defprop,props.ScrollOption)
 
       
-    let pagescroll = reactive(new PageScollClass(p.Index, 0,emit));
+    let pagescroll = ref(new PageScollClass(defprop.Index, 0,emit));
     onMounted(() => {
-
+      watch(props.ScrollOption,(n)=>{
+        Object.assign(defprop,n)
+        pagescroll.value.Mounted(defprop);    
+      },{immediate:true})
       
-      pagescroll.Mounted(p);
       // pagescroll.ReloadHeight()
       // // 设置页面监听
       // pagescroll.PageOnload();
