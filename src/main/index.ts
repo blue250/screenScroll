@@ -1,17 +1,17 @@
 // import { getCurrentInstance } from 'vue';
 // const instance = getCurrentInstance()!
 // 节流
-const throttleScroll = function (callback: (...args: any[]) => void, time: number = 100) {
-  let timer: number | null = null;
-  return function (this: Window, ...args: any[]) {
-    if (!timer) {
-      callback.apply(this, args);
-      timer = window.setTimeout(() => {
-        timer = null;
-      }, time);
-    }
-  };
-}
+// const throttleScroll = function (callback: (...args: any[]) => void, time: number = 100) {
+//   let timer: number | null = null;
+//   return function (this: Window, ...args: any[]) {
+//     if (!timer) {
+//       callback.apply(this, args);
+//       timer = window.setTimeout(() => {
+//         timer = null;
+//       }, time);
+//     }
+//   };
+// }
 
 // 防抖
 const debounce = function (callback: (...args: any[]) => void, time: number = 100) {
@@ -26,12 +26,12 @@ const debounce = function (callback: (...args: any[]) => void, time: number = 10
 }
 
 // 判断类型
-const showtype = function (v: any) {
-  let type = Object.prototype.toString.call(v)
-  let t = type.slice(1, type.length - 1).split(' ')[1]
-  return type
+// const showtype = function (v: any) {
+//   let type = Object.prototype.toString.call(v)
+//   let t = type.slice(1, type.length - 1).split(' ')[1]
+//   return type
 
-}
+// }
 
 // 页面类
 export default class PageScollClass {
@@ -99,7 +99,7 @@ export default class PageScollClass {
         }
       }
       this.ReloadNode(children)
-      this.PageLoad('On')
+      this.PageLoad()
     }else{
 
       
@@ -135,7 +135,7 @@ export default class PageScollClass {
 
 
   // 页面滚轮监听
-  PageLoad(type:'On'|'Off') {
+  PageLoad() {
     // const WheelList=throttleScroll((e: WheelEvent) => {
     //   if (e.deltaY > 0) {
     //     this.PageChange(1);
@@ -149,7 +149,8 @@ export default class PageScollClass {
           this.pagescrollnode!.addEventListener(
       "wheel",
       e=>{
-        e.stopPropagation()
+        e.preventDefault();
+        e.stopPropagation();
       if (e.deltaY > 0) {
         
         this.PageChange(1);
@@ -157,14 +158,14 @@ export default class PageScollClass {
       if (e.deltaY < 0) {
         this.PageChange(-1);
       }
-    }
+    }, { passive: false }
     );
 
 
 
     // 监听页面尺寸变化 重新赋值高度
     let resizeObserver:ResizeObserver|null=null;
-    let resizeFun=debounce((e) => {
+    let resizeFun=debounce(() => {
       
       const children = this.pagescrollnode!.children as HTMLCollectionOf<HTMLElement>;
       this.ReloadNode(children)
@@ -186,6 +187,8 @@ export default class PageScollClass {
     });
 
     this.pagescrollnode!.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (!startY) return;
 
       let deltaY = e.touches[0].clientY - startY;
@@ -200,7 +203,7 @@ export default class PageScollClass {
 
       // 重置 startY，以便下一次触摸事件
       startY = null;
-    });
+    }, { passive: false });
 
 
   }

@@ -14,7 +14,7 @@
     <div class="sild" v-if="ScrollOption.Nav">
       <ul>
         <li
-          v-for="(item, index) in pagescroll.PageMax + 1"
+          v-for="index in pagescroll.PageMax + 1"
           :key="'sild' + index"
           :class="{ active: pagescroll.ActiveNumber == index }"
           @click="pagescroll.PageTo(index)"
@@ -27,8 +27,8 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref, defineComponent, reactive, watch } from "vue";
-import PageScroll from "./main";
+import { onMounted, defineComponent, reactive, watch } from "vue";
+
 import PageScollClass from "./main/index";
 // interface ScrollOption{
 //   Index:number
